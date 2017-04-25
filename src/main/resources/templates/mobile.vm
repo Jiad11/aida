@@ -1,6 +1,6 @@
 
 #foreach ( $entry in $entries )
-    $entry.name : $entry.comment
+    $entry.make : $entry.model
     <a href="/edit/$entry.id">Edit</a>
     <form method="POST" action="/delete/$entry.id">
         <input type="submit" value="Delete" />
@@ -12,18 +12,20 @@
 
     <p>
 
-        #springBind("form.name")#springShowErrors("<br/>", "text-danger")
-        Name: #springFormInput("form.name")
+        #springBind("form.make")#springShowErrors("<br/>", "text-danger")
+        Make: #springFormInput("form.make")
 
         </br>
 
-        #springBind("form.comment")#springShowErrors("<br/>", "text-danger")
-        Comment: #springFormInput("form.comment")
+        #springBind("form.model")#springShowErrors("<br/>", "text-danger")
+        Model: #springFormInput("form.model")
+
+
+
 
         <input type="submit"/>
 
     </p>
 
-    hello world
 
 </form>

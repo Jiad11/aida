@@ -1,7 +1,7 @@
 package com.elderstudios.controller;
 
-import com.elderstudios.domain.GuestBookEntry;
-import com.elderstudios.service.GuestBookService;
+import com.elderstudios.domain.MobileServiceEntry;
+import com.elderstudios.service.MobileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,33 +14,33 @@ import javax.validation.Valid;
 public class HelloController {
 
 	@Autowired
-	protected GuestBookService guestBookService;
+	protected MobileService mobileService;
 
-	private static final String GUESTBOOK_FORM = "guestbook";
+	private static final String MOBILE_FORM = "mobile";
 	private static final String ENTRIES_KEY = "entries";
 	private static final String FORM_KEY = "form";
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String displayGuestbook( Model model ) {
+	public String displayMobile( Model model ) {
 
-		model.addAttribute(ENTRIES_KEY, guestBookService.findAll());
-		model.addAttribute(FORM_KEY, new GuestBookEntry());
+		model.addAttribute(ENTRIES_KEY, mobileService.findAll());
+		model.addAttribute(FORM_KEY, new MobileServiceEntry());
 
-		return GUESTBOOK_FORM;
+		return MOBILE_FORM;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String changeGuestbook(
+	public String changeMobile(
 			Model model,
-			@Valid @ModelAttribute(FORM_KEY) GuestBookEntry form,
+			@Valid @ModelAttribute(FORM_KEY) MobileServiceEntry form,
 			BindingResult bindingResult ) {
 
 		if ( bindingResult.hasErrors() ) {
-			model.addAttribute(ENTRIES_KEY, guestBookService.findAll());
-			return GUESTBOOK_FORM;
+			model.addAttribute(ENTRIES_KEY, mobileService.findAll());
+			return MOBILE_FORM;
 		}
 
-		guestBookService.save(form);
+		mobileService.save(form);
 
 		return "redirect:/";
 	}
@@ -48,32 +48,32 @@ public class HelloController {
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.POST)
 	public String deleteEntry (Model model, @PathVariable Long id) {
 
-		guestBookService.delete (id);
+		mobileService.delete (id);
 
 		return "redirect:/";
 	}
 
 	@RequestMapping (value="/edit/{id}", method = RequestMethod.GET)
 	public String editEntry (Model model, @PathVariable Long id) {
-		model.addAttribute (FORM_KEY, guestBookService.findOne (id));
-		return GUESTBOOK_FORM;
+		model.addAttribute (FORM_KEY, mobileService.findOne (id));
+		return MOBILE_FORM;
 	}
 
 	@RequestMapping (value="/edit/{id}", method = RequestMethod.POST)
-	public String editSaveGuestBook (Model model,
+	public String editSaveMobile (Model model,
 									 @PathVariable Long id,
-									 @Valid @ModelAttribute(FORM_KEY) GuestBookEntry form,
+									 @Valid @ModelAttribute(FORM_KEY) MobileServiceEntry form,
 									 BindingResult bindingResult ) {
 
 		if ( bindingResult.hasErrors() ) {
-			model.addAttribute(ENTRIES_KEY, guestBookService.findAll());
-			return GUESTBOOK_FORM;
+			model.addAttribute(ENTRIES_KEY, mobileService.findAll());
+			return MOBILE_FORM;
 		}
 
-		GuestBookEntry existing = guestBookService.findOne (id);
-		existing.setName (form.getName());
-		existing.setComment(form.getComment());
-		guestBookService.save (existing);
+		MobileServiceEntry existing = mobileService.findOne (id);
+		existing.setMake (form.getMake());
+		existing.setModel(form.getModel());
+		mobileService.save (existing);
 
 		return "redirect:/";
 	}
