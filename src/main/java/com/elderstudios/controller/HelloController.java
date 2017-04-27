@@ -73,6 +73,8 @@ public class HelloController {
 		MobileServiceEntry existing = mobileService.findOne (id);
 		existing.setMake (form.getMake());
 		existing.setModel(form.getModel());
+		existing.setColour(form.getColour());
+		existing.setImei(form.getImei());
 		mobileService.save (existing);
 
 		return "redirect:/";

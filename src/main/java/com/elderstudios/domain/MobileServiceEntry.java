@@ -23,6 +23,12 @@ public class MobileServiceEntry {
     @NotEmpty
     private String model;
 
+    @NotEmpty
+    private String colour;
+
+    @NotEmpty
+    private String imei;
+
     @CreatedDate
     @Column(nullable = false)
     private Date created;
@@ -51,6 +57,16 @@ public class MobileServiceEntry {
     }
 
     public void setModel(String model) { this.model = model;
+    }
+
+    public String getColour() {return colour; }
+
+    public void setColour(String colour) { this.colour = colour;
+    }
+
+    public String getImei() {return imei; }
+
+    public void setImei(String imei) { this.imei = imei;
     }
 
     public Date getCreated() {
