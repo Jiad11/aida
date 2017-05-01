@@ -4,6 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +21,8 @@ public class MobileServiceEntry {
     private Long id;
 
     @NotEmpty
+    @NotNull
+    @Size(min=2, max=30)
     private String make;
 
     @NotEmpty
