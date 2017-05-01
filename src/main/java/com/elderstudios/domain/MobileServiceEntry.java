@@ -32,6 +32,8 @@ public class MobileServiceEntry {
     private String colour;
 
     @NotEmpty
+    @NotNull
+    @Size(min=16, max=16)
     private String imei;
 
     @CreatedDate

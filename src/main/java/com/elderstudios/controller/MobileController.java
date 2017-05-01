@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import javax.validation.Valid;
 
 @Controller
-public class HelloController {
+public class MobileController {
 
 	@Autowired
 	protected MobileService mobileService;
